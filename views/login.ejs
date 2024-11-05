@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<%include ./partials/include%>
+	<title><%=global.gTitle%> | Login</title>
+	<script>
+	$(document).ready(function() {
+		document.getElementById("id").placeholder = ID_TEXT;
+		document.getElementById("password").placeholder = PASSWORD_TEXT;
+		if(getCookie("remember_check") == "true") {
+			document.getElementById("id").value = getCookie("user_id");
+			$(".remember").prop("checked", true);
+		}
+		$(".remember").on("ifChecked", function(event){
+			setCookie("remember_check", "true", 10000);
+		}).on("ifUnchecked", function(event){
+			setCookie("remember_check", "false", 10000);
+		}).iCheck({
+			checkboxClass: "icheckbox_minimal-blue",
+			radioClass: "icheckbox_minimal-blue",
+			increaseArea: "20%"
+		});	
+	});	
+	
+	function login() {
+		var id = trim(document.getElementById("id").value);
+		var password = trim(document.getElementById("password").value);
+        // console.log('ID: '+id+'  |   PWD: '+ password);
+        
+        // alert("ID:"+id);
+        // alert("PA:"+password);
+		if(id == null || id == '' || id === undefined){
+            alert(EMAIL_NULL_FAIL_MSG);
+            return;
+		}
+		// else{
+		//     if(!emailCheck(id)){
+        //         alert(EMAIL_FAILSE_FAIL_MSG);
+        //         return;
+		// 	}
+		// }
+
+        if(password == null || password == '' || password === undefined){
+            alert(PASS_NULL_FAIL_MSG);
+            return;
+        }
+
+		if(length0Check(id) || length0Check(password) ) {
+            console.log(" Check");
+			alert(LOGIN_FAIL_MSG);
+			return;
+		}
+
+		var data = {id:id, password:password};
+		deferred = $.post("<%=gRoot%>/onLogin", data);
+		deferred.success(function(result) {
+			if(result.code == 1000) {
+				setCookie("user_id", id, 10000);
+				window.location.replace("<%=gRoot%>/customer");
+			} else {
+                console.log(" DB false");
+				alert(LOGIN_FAIL_MSG);
+			}
+		});
+		deferred.error(function(error) {
+			console.log(error);
+		});
+	}
+	</script>
+</head>
+
+<body class="login-page itview_bg">
+	<div class="login-box">
+		<div class="login-logo">
+			<!--<a href="#"><img src="<%=gRoot%>/images/logo_lg3.png"></a>-->
+		</div>
+		<div id="login_div" class="login-box-body2">
+			<div class="form-group has-feedback">
+				<input type="text" class="form-control height35" id="id" placeholder=""/>
+				<span class="glyphicon glyphicon-user form-control-feedback"></span>
+			</div>
+			<div class="form-group has-feedback">
+				<input type="password" class="form-control height35" id="password" placeholder="" onKeyPress="if(event.keyCode==13){login();event.returnValue=false}"/>
+				<span class="glyphicon glyphicon-lock form-control-feedback"></span>
+			</div>
+			<div class="row" style="margin-top:-10px; margin-bottom:10px;">
+				<div class="col-xs-12">
+					<!--<label class="pull-right"><input type="checkbox" class="remember" id="remember"> <span class="font12" style="color:grey;"><script>document.write(ID_SAVE_TEXT);</script></span></label><br><br>-->
+					<span type="button" class="btn btn-primary btn-block btn-flat" onclick="login();"><script>document.write(LOGIN_BTN);</script></span>
+				</div>
+			</div>			
+		</div>
+	</div>
+</body>
+</html>

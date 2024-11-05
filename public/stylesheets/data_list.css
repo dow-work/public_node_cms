@@ -1,0 +1,92 @@
+.tb_data_total{
+
+    background-color: #69cfef;
+}
+.tb_data_sub_total{
+    background-color: #c5daef;
+}
+
+.div-right {
+    position: absolute;
+    right: 0px;
+    width: 15%;
+    margin: auto;
+}
+
+.info-box{
+    min-height: 60px;
+    vertical-align: middle;
+}
+
+ul[name="modal_list_ul"],
+ul[name="data_list_ul"]{
+    display:inline-block;
+    height: 30px;
+    minWidth:95px;
+    vertical-align:middle;
+    padding:0;
+    align-items:center;
+    list-style-type:none;
+    margin-top:10px;
+    position:relative;;
+}
+
+ul[name="modal_list_ul"] > li[name="modal_list_li"],
+ul[name="data_list_ul"] > li[name="data_list_li"] {
+    display: inline;
+    vertical-align: middle;
+    height: 30px;
+    text-aglin: right;
+    margin-left: 10px;
+    margin-right: 10px;
+    position: relative;
+}
+
+ul[name="modal_list_ul"] > li[name="modal_list_li"] > span,
+ul[name="data_list_ul"] > li[name="data_list_li"] > span {
+    vertical-align: middle;
+    height: 30px;
+    position: relative;
+}
+input[name="dateone"],
+input[name="daterange"] {
+    minWidth: 95px;
+    width: 180px;
+    vertical-align: middle;
+    position: relative;
+    align-items: center;
+    margin-left: -15px;
+    height: 30px;
+}
+
+input[name="modalStore"],
+input[name="datastoresearch"]{
+    vertical-align:middle;
+    height: 30px;
+}
+input[name="dateone"],
+input[name="modalStore"]{
+    color: #4f5157;
+}
+
+
+
+input[name="status_value"] {
+    vertical-align: middle;
+    text-align: center;
+    height: 30px;
+    width: 30px;
+    position: relative;
+}
+
+.paiddrop {
+    height: 40px;
+    padding: 0;
+}
+
+.li_paiddrop {
+    height: 50%;
+    margin: 0px;
+    padding: 0px;
+    border: 1px solid #dddddd;
+}
